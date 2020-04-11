@@ -1,0 +1,9 @@
+C:\Users\Madalina\Documents\GitHub\NivelAccesDate1\bin\Debug\NivelAccesDate1.dll
+C:\Users\Madalina\Documents\GitHub\NivelAccesDate1\bin\Debug\NivelAccesDate1.pdb
+C:\Users\Madalina\Documents\GitHub\NivelAccesDate1\bin\Debug\LibrarieModele.dll
+C:\Users\Madalina\Documents\GitHub\NivelAccesDate1\bin\Debug\LibrarieModele.pdb
+C:\Users\Madalina\Documents\GitHub\NivelAccesDate1\obj\Debug\NivelAccesDate1.csprojAssemblyReference.cache
+C:\Users\Madalina\Documents\GitHub\NivelAccesDate1\obj\Debug\NivelAccesDate1.csproj.CoreCompileInputs.cache
+C:\Users\Madalina\Documents\GitHub\NivelAccesDate1\obj\Debug\NivelAccesDate1.csproj.CopyComplete
+C:\Users\Madalina\Documents\GitHub\NivelAccesDate1\obj\Debug\NivelAccesDate1.dll
+C:\Users\Madalina\Documents\GitHub\NivelAccesDate1\obj\Debug\NivelAccesDate1.pdb
