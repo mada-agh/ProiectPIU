@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,8 +18,11 @@ namespace LibrarieModele
         private const int EDITURA = 2;
         private const int COD = 3;
         private const int N_EXEMPLARE = 4;
-        private const int LIMBA = 5;
-        private const int GEN = 6;
+        private const int N_IMPRUMUTATE = 5;
+        private const int LIMBA = 6;
+        private const int GEN = 7;
+        //prop diferenta carti disponibile
+        
 
         public static int NextID { get; set; } = 0;
         public int Cod { get; set; }
@@ -26,9 +30,12 @@ namespace LibrarieModele
         public string Autor { get; set; }
         public string Editura { get; set; }
         public int NumarExemplare { get; set; }
+        public int NumarImprumutate { get; set; }
         public string NumeComplet { get { return Titlu + " - " + Autor + " - " + Editura; } }
         public LimbaCarte Limba { get; set; }
         public GenCarte Gen { get; set; }
+        public int CartiDisponibile { get { return NumarExemplare - NumarImprumutate; } }
+        
 
         public Carte(string _titlu = "", string _autor = "", string _editura = "", int nrex = 1)
         {
@@ -37,6 +44,7 @@ namespace LibrarieModele
             Editura = _editura;
             Cod = ++NextID;
             NumarExemplare = nrex;
+            NumarImprumutate = 0;
         }
         public Carte(string date)
         {
@@ -48,12 +56,13 @@ namespace LibrarieModele
             Cod = Convert.ToInt32(infoCarte[COD]);
             NextID = Cod;
             NumarExemplare = Convert.ToInt32(infoCarte[N_EXEMPLARE]);
+            NumarImprumutate = Convert.ToInt32(infoCarte[N_IMPRUMUTATE]);
             Limba = (LimbaCarte)Enum.Parse(typeof(LimbaCarte), infoCarte[LIMBA]);
             Gen = (GenCarte)Enum.Parse(typeof(GenCarte), infoCarte[GEN]);
         }
         public string ConversieLaSir()
         {
-            return "#"+Cod.ToString()+" - "+Titlu + " - " + Autor + " - " + Editura + " - " +"\nLimba: "+Limba+"\nGen: "+Gen+"\nNumar exemplare: "+NumarExemplare.ToString();
+            return "#"+Cod.ToString()+" - "+Titlu + " - " + Autor + " - " + Editura +"\nLimba: "+Limba+"\nGen: "+Gen+"\nNumar exemplare: "+NumarExemplare.ToString()+"\n";
         }
         public int Compara(Carte c)
         {
@@ -73,8 +82,8 @@ namespace LibrarieModele
         }
         public string ConversieLaSir_PentruFisier()
         {
-            string s = string.Format("{1}{0}{2}{0}{3}{0}{4}{0}{5}{0}{6}{0}{7}",
-                SEPARATOR_PRINCIPAL_FISIER, (Titlu ?? "NECUNOSCUT"), (Autor ?? " NECUNOSCUT "), (Editura ?? " NECUNOSCUT "), Cod.ToString(), NumarExemplare.ToString(), Limba, Gen);
+            string s = string.Format("{1}{0}{2}{0}{3}{0}{4}{0}{5}{0}{6}{0}{7}{0}{8}",
+                SEPARATOR_PRINCIPAL_FISIER, (Titlu ?? "NECUNOSCUT"), (Autor ?? " NECUNOSCUT "), (Editura ?? " NECUNOSCUT "), Cod.ToString(), NumarExemplare.ToString(), NumarImprumutate.ToString(),Limba, Gen);
 
             return s;
         }

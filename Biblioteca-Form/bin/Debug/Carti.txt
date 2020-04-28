@@ -1,0 +1,4 @@
+harry potter;roling;artur;1;43;0;Nedefinit;Nedefinit
+carte;autor;edit;2;5;0;Nedefinit;Nedefinit
+ingeri si demoni;dan brown;buntu;3;23;0;Nedefinit;Nedefinit
+teorema catherine;john green;vintage;4;4;0;Nedefinit;Nedefinit

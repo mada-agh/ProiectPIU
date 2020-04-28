@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using LibrarieModele;
+using System.Collections;
 
 namespace NivelAccesDate1
 {
@@ -43,9 +44,9 @@ namespace NivelAccesDate1
             }
         }
 
-        public Carte[] GetCarti(out int nrCarti)
+        public ArrayList GetCarti()
         {
-            Carte[] carti = new Carte[PAS_ALOCARE];
+            ArrayList carti = new ArrayList();
 
             try
             {
@@ -53,16 +54,12 @@ namespace NivelAccesDate1
                 using (StreamReader sr = new StreamReader(NumeFisier))
                 {
                     string line;
-                    nrCarti = 0;
 
                     //citeste cate o linie si creaza un obiect de tip Student pe baza datelor din linia citita
                     while ((line = sr.ReadLine()) != null)
                     {
-                        carti[nrCarti++] = new Carte(line);
-                        if (nrCarti == PAS_ALOCARE)
-                        {
-                            Array.Resize(ref carti, nrCarti + PAS_ALOCARE);
-                        }
+                        Carte s = new Carte(line);
+                        carti.Add(s);
                     }
                 }
             }
@@ -77,23 +74,57 @@ namespace NivelAccesDate1
 
             return carti;
         }
-        public bool UpdateCarte(Carte[] carti, int _cod)
+        public bool UpdateCarte(Carte carte)
         {
-            bool rez = false;
+            ArrayList carti = GetCarti();
+            bool actualizareCuSucces = false;
             try
             {
-                string[] linii = File.ReadAllLines(NumeFisier);
-                using (StreamWriter swFisierText = new StreamWriter(NumeFisier))
+                //instructiunea 'using' va apela la final swFisierText.Close();
+                //al doilea parametru setat la 'false' al constructorului StreamWriter indica modul 'overwrite' de deschidere al fisierului
+                using (StreamWriter swFisierText = new StreamWriter(NumeFisier, false))
                 {
-                    for (int i = 0; i < linii.Length; i++)
+                    foreach (Carte c in carti)
                     {
-                        if (carti[i].Cod == _cod)
+                        //informatiile despre studentul actualizat vor fi preluate din parametrul "studentActualizat"
+                        if (c.Cod != carte.Cod)
                         {
-                            swFisierText.WriteLine(carti[i].ConversieLaSir_PentruFisier());
-                            rez = true;
+                            swFisierText.WriteLine(c.ConversieLaSir_PentruFisier());
                         }
                         else
-                            swFisierText.WriteLine(linii[i]);
+                        {
+                            swFisierText.WriteLine(carte.ConversieLaSir_PentruFisier());
+                        }
+                    }
+                    actualizareCuSucces = true;
+                }
+            }
+            catch (IOException eIO)
+            {
+                throw new Exception("Eroare la deschiderea fisierului. Mesaj: " + eIO.Message);
+            }
+            catch (Exception eGen)
+            {
+                throw new Exception("Eroare generica. Mesaj: " + eGen.Message);
+            }
+
+            return actualizareCuSucces;
+        }
+        public int NrCarti()
+        {
+            int nrCarti;
+            try
+            {
+                // instructiunea 'using' va apela sr.Close()
+                using (StreamReader sr = new StreamReader(NumeFisier))
+                {
+                    string line;
+                    nrCarti = 0;
+
+                    //citeste cate o linie si creaza un obiect de tip Student pe baza datelor din linia citita
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        nrCarti++;
                     }
                 }
             }
@@ -105,7 +136,36 @@ namespace NivelAccesDate1
             {
                 throw new Exception("Eroare generica. Mesaj: " + eGen.Message);
             }
-            return rez;
+
+            return nrCarti;
+        }
+        public Carte GetCarte(string titlu, string autor)
+        {
+            try
+            {
+                // instructiunea 'using' va apela sr.Close()
+                using (StreamReader sr = new StreamReader(NumeFisier))
+                {
+                    string line;
+
+                    //citeste cate o linie si creaza un obiect de tip Student pe baza datelor din linia citita
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        Carte carte = new Carte(line);
+                        if (carte.Titlu.Equals(titlu) && carte.Autor.Equals(autor))
+                            return carte;
+                    }
+                }
+            }
+            catch (IOException eIO)
+            {
+                throw new Exception("Eroare la deschiderea fisierului. Mesaj: " + eIO.Message);
+            }
+            catch (Exception eGen)
+            {
+                throw new Exception("Eroare generica. Mesaj: " + eGen.Message);
+            }
+            return null;
         }
     }
 }

@@ -24,7 +24,7 @@ namespace Biblioteca_Form
                 {
                     default:
                     case "bin":
-                    return new AdministrareCarti_FisierBinar(numeFisier + "." + formatSalvare);
+                        return new AdministrareCarti_FisierBinar(numeFisier + "." + formatSalvare);
                     case "txt":
                         return new AdministrareCarti_FisierText(numeFisier + "." + formatSalvare);
                 }
@@ -42,7 +42,7 @@ namespace Biblioteca_Form
                 {
                     default:
                     case "bin":
-                    return new AdministrareCititori_FisierBinar(numeFisier + "." + formatSalvare);
+                        return new AdministrareCititori_FisierBinar(numeFisier + "." + formatSalvare);
                     case "txt":
                         return new AdministrareCititori_FisierText(numeFisier + "." + formatSalvare);
                 }

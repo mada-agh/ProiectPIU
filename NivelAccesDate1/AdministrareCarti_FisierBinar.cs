@@ -1,5 +1,6 @@
 ﻿using LibrarieModele;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace NivelAccesDate1
@@ -18,7 +19,7 @@ namespace NivelAccesDate1
             throw new Exception("Optiunea AddCarte nu este implementata");
         }
 
-        public Carte[] GetCarti(out int nrCarti)
+        public ArrayList GetCarti()
         {
             throw new Exception("Optiunea GetCarti nu este implementata");
         }
@@ -27,9 +28,13 @@ namespace NivelAccesDate1
         {
             throw new Exception("Optiunea GetCarte nu este implementata");
         }
-        public bool UpdateCarte(Carte[] c,int cod)
+        public bool UpdateCarte(Carte carte)
         {
-            throw new Exception("Optiunea UpdateCarte nu est implementata");
+            throw new Exception("Optiunea UpdateCarte nu este implementata");
+        }
+        public int NrCarti()
+        {
+            throw new Exception("Optiunea NrCarti nu este implementata");
         }
     }
 }

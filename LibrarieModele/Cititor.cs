@@ -13,12 +13,14 @@ namespace LibrarieModele
         private const int EGAL = 0;
         private const int MAX_CARTI_IMPRUMUT = 10;
         private const char SEPARATOR_PRINCIPAL_FISIER = ';';
+        private const char SEPARATOR_SECUNDAR_FISIER = ',';
         private const int COD = 0;
         private const int NUME = 1;
         private const int PRENUME = 2;
         private const int NR_CARTI = 3;
+        private const int NR_IMPRUMUT_ID = 4;
 
-        Carte[] imprumut;
+        public int[] imprumutID; //codul cartilor imprumutate
         public static int NextID { get; set; } = 0;
         public string Nume { get; set; }
         public string Prenume { get; set; }
@@ -31,6 +33,7 @@ namespace LibrarieModele
             Prenume = _prenume;
             NrCarti = 0;
             Cod = ++NextID;
+            imprumutID = new int[MAX_CARTI_IMPRUMUT];
         }
         public Cititor(string dateCititor)
         {
@@ -41,6 +44,10 @@ namespace LibrarieModele
             Nume = infoCititor[NUME];
             Prenume = infoCititor[PRENUME];
             NrCarti = Int32.Parse(infoCititor[NR_CARTI]);
+            imprumutID = new int[MAX_CARTI_IMPRUMUT];
+            string[] IDcarti = infoCititor[NR_IMPRUMUT_ID].Split(SEPARATOR_SECUNDAR_FISIER);
+            for(int i=0; i<NrCarti; i++)
+                imprumutID[i] = Int32.Parse(IDcarti[i]);
         }
         public bool NrMaxCarti()
         {
@@ -70,10 +77,41 @@ namespace LibrarieModele
         }
         public string ConversieLaSir_PentruFisier()
         {
-            string s = string.Format("{1}{0}{2}{0}{3}{0}{4}",
-                SEPARATOR_PRINCIPAL_FISIER, Cod.ToString(), (Nume ?? "NECUNOSCUT"), (Prenume ?? " NECUNOSCUT "), NrCarti.ToString());
+            string s = string.Format("{1}{0}{2}{0}{3}{0}{4}{0}{5}",
+                SEPARATOR_PRINCIPAL_FISIER, Cod.ToString(), (Nume ?? "NECUNOSCUT"), (Prenume ?? " NECUNOSCUT "), NrCarti.ToString(), ConversieLaSir_ImprumutID());
 
             return s;
+        }
+        public string ConversieLaSir_ImprumutID()
+        {
+            string[] strImp=new string[NrCarti];
+            for(int i=0; i<NrCarti; i++)
+                strImp[i] = imprumutID[i].ToString();
+            return string.Join(SEPARATOR_SECUNDAR_FISIER.ToString(), strImp);
+        }
+        public bool NouImprumut(Carte c)
+        {
+            if (!NrMaxCarti())
+            {
+                imprumutID[NrCarti++] = c.Cod;
+                c.NumarImprumutate++;
+                return true;
+            }
+            return false;
+        }
+        public void Returnare(Carte c)
+        {
+            for(int i=0; i<NrCarti; i++)
+            {
+                if (imprumutID[i] == c.Cod)
+                {
+                    for(int j=i; j<NrCarti-1; j++)
+                        imprumutID[j] = imprumutID[j+1];
+                    NrCarti--;
+                    c.NumarImprumutate--;
+                    return;
+                }
+            }
         }
     }
 }
