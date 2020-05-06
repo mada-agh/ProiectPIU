@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 
 namespace Biblioteca_Form
 {
+    [Flags]
     public enum CodEroare
     {
         CORECT=0,
         TITLU_INCORECT=1,
         AUTOR_INCORECT=2,
-        EDITURA_INCORECTA=3,
-        EXEMPLARE_INCORECT=4
+        EDITURA_INCORECTA=4,
+        EXEMPLARE_INCORECT=8,
+        LIMBA_NESELECTATA=16
     }
 }

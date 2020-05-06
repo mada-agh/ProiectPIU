@@ -13,6 +13,7 @@ namespace LibrarieModele
         private const int MAI_MIC = 1;
         private const int EGAL = 0;
         private const char SEPARATOR_PRINCIPAL_FISIER = ';';
+        private const char SEPARATOR_SECUNDAR_FISIER = ',';
         private const int TITLU = 0;
         private const int AUTOR = 1;
         private const int EDITURA = 2;
@@ -21,7 +22,6 @@ namespace LibrarieModele
         private const int N_IMPRUMUTATE = 5;
         private const int LIMBA = 6;
         private const int GEN = 7;
-        //prop diferenta carti disponibile
         
 
         public static int NextID { get; set; } = 0;
@@ -62,7 +62,7 @@ namespace LibrarieModele
         }
         public string ConversieLaSir()
         {
-            return "#"+Cod.ToString()+" - "+Titlu + " - " + Autor + " - " + Editura +"\nLimba: "+Limba+"\nGen: "+Gen+"\nNumar exemplare: "+NumarExemplare.ToString()+"\n";
+            return "#"+Cod.ToString()+" - "+Titlu + " - " + Autor + " - " + Editura +"\nLimbă: "+Limba+"\nGen: "+Gen+"\nNumăr de exemplare: "+NumarExemplare.ToString()+"\n";
         }
         public int Compara(Carte c)
         {
