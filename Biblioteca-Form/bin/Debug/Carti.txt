@@ -1,6 +1,1 @@
-harry potter;roling;artur;1;43;0;Nedefinit;Nedefinit
-carte;autor;edit;2;5;0;Nedefinit;Nedefinit
-ingeri si demoni;dan brown;buntu;3;23;0;Nedefinit;Nedefinit
-teorema catherine;john green;vintage;4;4;0;Nedefinit;Nedefinit
-curs;prof;univer;5;7;0;Romana;Nedefinit
-carte interesanta;autor bravo;ceva bun;6;33;0;Engleza;Groaza, Fantezie
+harry potter;roling;artur;1;11;0;Romana;Fantezie

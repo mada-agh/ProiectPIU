@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.lblTitlu = new System.Windows.Forms.Label();
             this.lblAutor = new System.Windows.Forms.Label();
             this.lblEditura = new System.Windows.Forms.Label();
@@ -35,10 +36,8 @@
             this.txtTitlu = new System.Windows.Forms.TextBox();
             this.txtAutor = new System.Windows.Forms.TextBox();
             this.txtEditura = new System.Windows.Forms.TextBox();
-            this.txtNrExemplare = new System.Windows.Forms.TextBox();
             this.btnAdauga = new System.Windows.Forms.Button();
             this.btnAfisare = new System.Windows.Forms.Button();
-            this.rtbAfisare = new System.Windows.Forms.RichTextBox();
             this.btnCauta = new System.Windows.Forms.Button();
             this.lblInfo = new System.Windows.Forms.Label();
             this.btnModifica = new System.Windows.Forms.Button();
@@ -63,6 +62,9 @@
             this.ckbDragoste = new System.Windows.Forms.CheckBox();
             this.ckbCriminalistic = new System.Windows.Forms.CheckBox();
             this.ckbCopii = new System.Windows.Forms.CheckBox();
+            this.cmbNrExemplare = new System.Windows.Forms.ComboBox();
+            this.lstAfisare = new System.Windows.Forms.ListBox();
+            this.lblID = new System.Windows.Forms.Label();
             this.gpbLimba.SuspendLayout();
             this.gpbGenul.SuspendLayout();
             this.SuspendLayout();
@@ -70,6 +72,7 @@
             // lblTitlu
             // 
             this.lblTitlu.AutoSize = true;
+            this.lblTitlu.BackColor = System.Drawing.Color.Transparent;
             this.lblTitlu.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitlu.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.lblTitlu.Location = new System.Drawing.Point(10, 19);
@@ -81,6 +84,7 @@
             // lblAutor
             // 
             this.lblAutor.AutoSize = true;
+            this.lblAutor.BackColor = System.Drawing.Color.Transparent;
             this.lblAutor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAutor.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.lblAutor.Location = new System.Drawing.Point(10, 51);
@@ -92,6 +96,7 @@
             // lblEditura
             // 
             this.lblEditura.AutoSize = true;
+            this.lblEditura.BackColor = System.Drawing.Color.Transparent;
             this.lblEditura.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEditura.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.lblEditura.Location = new System.Drawing.Point(10, 85);
@@ -103,6 +108,7 @@
             // lblNrExemplare
             // 
             this.lblNrExemplare.AutoSize = true;
+            this.lblNrExemplare.BackColor = System.Drawing.Color.Transparent;
             this.lblNrExemplare.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNrExemplare.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.lblNrExemplare.Location = new System.Drawing.Point(10, 121);
@@ -132,17 +138,9 @@
             this.txtEditura.Size = new System.Drawing.Size(244, 22);
             this.txtEditura.TabIndex = 6;
             // 
-            // txtNrExemplare
-            // 
-            this.txtNrExemplare.Location = new System.Drawing.Point(204, 120);
-            this.txtNrExemplare.Name = "txtNrExemplare";
-            this.txtNrExemplare.Size = new System.Drawing.Size(32, 22);
-            this.txtNrExemplare.TabIndex = 7;
-            // 
             // btnAdauga
             // 
-            this.btnAdauga.BackColor = System.Drawing.Color.Silver;
-            this.btnAdauga.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btnAdauga.BackColor = System.Drawing.SystemColors.ControlLight;
             this.btnAdauga.Font = new System.Drawing.Font("Segoe Print", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAdauga.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnAdauga.Location = new System.Drawing.Point(233, 399);
@@ -155,8 +153,7 @@
             // 
             // btnAfisare
             // 
-            this.btnAfisare.BackColor = System.Drawing.Color.Silver;
-            this.btnAfisare.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btnAfisare.BackColor = System.Drawing.SystemColors.ControlLight;
             this.btnAfisare.Font = new System.Drawing.Font("Segoe Print", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAfisare.Location = new System.Drawing.Point(15, 399);
             this.btnAfisare.Name = "btnAfisare";
@@ -166,18 +163,9 @@
             this.btnAfisare.UseVisualStyleBackColor = false;
             this.btnAfisare.Click += new System.EventHandler(this.btnAfisare_Click);
             // 
-            // rtbAfisare
-            // 
-            this.rtbAfisare.Location = new System.Drawing.Point(473, 19);
-            this.rtbAfisare.Name = "rtbAfisare";
-            this.rtbAfisare.Size = new System.Drawing.Size(353, 332);
-            this.rtbAfisare.TabIndex = 11;
-            this.rtbAfisare.Text = "";
-            // 
             // btnCauta
             // 
-            this.btnCauta.BackColor = System.Drawing.Color.Silver;
-            this.btnCauta.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btnCauta.BackColor = System.Drawing.SystemColors.ControlLight;
             this.btnCauta.Font = new System.Drawing.Font("Segoe Print", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCauta.Location = new System.Drawing.Point(233, 453);
             this.btnCauta.Name = "btnCauta";
@@ -199,8 +187,7 @@
             // 
             // btnModifica
             // 
-            this.btnModifica.BackColor = System.Drawing.Color.Silver;
-            this.btnModifica.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btnModifica.BackColor = System.Drawing.SystemColors.ControlLight;
             this.btnModifica.Font = new System.Drawing.Font("Segoe Print", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnModifica.Location = new System.Drawing.Point(15, 453);
             this.btnModifica.Name = "btnModifica";
@@ -212,10 +199,9 @@
             // 
             // btnCartiDisponibile
             // 
-            this.btnCartiDisponibile.BackColor = System.Drawing.Color.Silver;
+            this.btnCartiDisponibile.BackColor = System.Drawing.SystemColors.ControlLight;
             this.btnCartiDisponibile.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.btnCartiDisponibile.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnCartiDisponibile.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnCartiDisponibile.Font = new System.Drawing.Font("Segoe Print", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCartiDisponibile.Location = new System.Drawing.Point(130, 509);
             this.btnCartiDisponibile.Name = "btnCartiDisponibile";
@@ -227,12 +213,14 @@
             // 
             // gpbLimba
             // 
+            this.gpbLimba.BackColor = System.Drawing.Color.Transparent;
             this.gpbLimba.Controls.Add(this.rbRusa);
             this.gpbLimba.Controls.Add(this.rbFranceza);
             this.gpbLimba.Controls.Add(this.rbItaliana);
             this.gpbLimba.Controls.Add(this.rbEngleza);
             this.gpbLimba.Controls.Add(this.rbGermana);
             this.gpbLimba.Controls.Add(this.rbRomana);
+            this.gpbLimba.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.gpbLimba.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gpbLimba.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.gpbLimba.Location = new System.Drawing.Point(13, 148);
@@ -250,7 +238,7 @@
             this.rbRusa.Size = new System.Drawing.Size(68, 22);
             this.rbRusa.TabIndex = 20;
             this.rbRusa.TabStop = true;
-            this.rbRusa.Text = "Rusă";
+            this.rbRusa.Text = "Rusa";
             this.rbRusa.UseVisualStyleBackColor = true;
             // 
             // rbFranceza
@@ -261,7 +249,7 @@
             this.rbFranceza.Size = new System.Drawing.Size(99, 22);
             this.rbFranceza.TabIndex = 20;
             this.rbFranceza.TabStop = true;
-            this.rbFranceza.Text = "Franceză";
+            this.rbFranceza.Text = "Franceza";
             this.rbFranceza.UseVisualStyleBackColor = true;
             // 
             // rbItaliana
@@ -272,7 +260,7 @@
             this.rbItaliana.Size = new System.Drawing.Size(82, 22);
             this.rbItaliana.TabIndex = 20;
             this.rbItaliana.TabStop = true;
-            this.rbItaliana.Text = "Italiană";
+            this.rbItaliana.Text = "Italiana";
             this.rbItaliana.UseVisualStyleBackColor = true;
             // 
             // rbEngleza
@@ -283,7 +271,7 @@
             this.rbEngleza.Size = new System.Drawing.Size(89, 22);
             this.rbEngleza.TabIndex = 20;
             this.rbEngleza.TabStop = true;
-            this.rbEngleza.Text = "Engleză";
+            this.rbEngleza.Text = "Engleza";
             this.rbEngleza.UseVisualStyleBackColor = true;
             // 
             // rbGermana
@@ -294,7 +282,7 @@
             this.rbGermana.Size = new System.Drawing.Size(98, 22);
             this.rbGermana.TabIndex = 20;
             this.rbGermana.TabStop = true;
-            this.rbGermana.Text = "Germană";
+            this.rbGermana.Text = "Germana";
             this.rbGermana.UseVisualStyleBackColor = true;
             // 
             // rbRomana
@@ -305,11 +293,12 @@
             this.rbRomana.Size = new System.Drawing.Size(92, 22);
             this.rbRomana.TabIndex = 20;
             this.rbRomana.TabStop = true;
-            this.rbRomana.Text = "Română";
+            this.rbRomana.Text = "Romana";
             this.rbRomana.UseVisualStyleBackColor = true;
             // 
             // gpbGenul
             // 
+            this.gpbGenul.BackColor = System.Drawing.Color.Transparent;
             this.gpbGenul.Controls.Add(this.ckbMitologie);
             this.gpbGenul.Controls.Add(this.ckbIstoric);
             this.gpbGenul.Controls.Add(this.ckbPoetica);
@@ -463,22 +452,73 @@
             this.ckbCopii.UseVisualStyleBackColor = true;
             this.ckbCopii.CheckedChanged += new System.EventHandler(this.ckbGen_CheckedChanged);
             // 
+            // cmbNrExemplare
+            // 
+            this.cmbNrExemplare.FormattingEnabled = true;
+            this.cmbNrExemplare.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "20"});
+            this.cmbNrExemplare.Location = new System.Drawing.Point(204, 120);
+            this.cmbNrExemplare.Name = "cmbNrExemplare";
+            this.cmbNrExemplare.Size = new System.Drawing.Size(124, 24);
+            this.cmbNrExemplare.TabIndex = 21;
+            // 
+            // lstAfisare
+            // 
+            this.lstAfisare.FormattingEnabled = true;
+            this.lstAfisare.ItemHeight = 16;
+            this.lstAfisare.Location = new System.Drawing.Point(508, 32);
+            this.lstAfisare.Name = "lstAfisare";
+            this.lstAfisare.Size = new System.Drawing.Size(393, 356);
+            this.lstAfisare.TabIndex = 22;
+            this.lstAfisare.SelectedIndexChanged += new System.EventHandler(this.lstAfisare_SelectedIndexChanged);
+            // 
+            // lblID
+            // 
+            this.lblID.AutoSize = true;
+            this.lblID.Location = new System.Drawing.Point(364, 123);
+            this.lblID.Name = "lblID";
+            this.lblID.Size = new System.Drawing.Size(0, 17);
+            this.lblID.TabIndex = 23;
+            this.lblID.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.BackColor = System.Drawing.Color.Maroon;
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(953, 573);
+            this.Controls.Add(this.lblID);
+            this.Controls.Add(this.lstAfisare);
+            this.Controls.Add(this.cmbNrExemplare);
             this.Controls.Add(this.gpbGenul);
             this.Controls.Add(this.gpbLimba);
             this.Controls.Add(this.btnCartiDisponibile);
             this.Controls.Add(this.btnModifica);
             this.Controls.Add(this.lblInfo);
             this.Controls.Add(this.btnCauta);
-            this.Controls.Add(this.rtbAfisare);
             this.Controls.Add(this.btnAfisare);
             this.Controls.Add(this.btnAdauga);
-            this.Controls.Add(this.txtNrExemplare);
             this.Controls.Add(this.txtEditura);
             this.Controls.Add(this.txtAutor);
             this.Controls.Add(this.txtTitlu);
@@ -486,6 +526,7 @@
             this.Controls.Add(this.lblEditura);
             this.Controls.Add(this.lblAutor);
             this.Controls.Add(this.lblTitlu);
+            this.DoubleBuffered = true;
             this.Name = "Form1";
             this.Text = "Biblioteca";
             this.gpbLimba.ResumeLayout(false);
@@ -506,10 +547,8 @@
         private System.Windows.Forms.TextBox txtTitlu;
         private System.Windows.Forms.TextBox txtAutor;
         private System.Windows.Forms.TextBox txtEditura;
-        private System.Windows.Forms.TextBox txtNrExemplare;
         private System.Windows.Forms.Button btnAdauga;
         private System.Windows.Forms.Button btnAfisare;
-        private System.Windows.Forms.RichTextBox rtbAfisare;
         private System.Windows.Forms.Button btnCauta;
         private System.Windows.Forms.Label lblInfo;
         private System.Windows.Forms.Button btnModifica;
@@ -534,6 +573,9 @@
         private System.Windows.Forms.CheckBox ckbDragoste;
         private System.Windows.Forms.CheckBox ckbCriminalistic;
         private System.Windows.Forms.CheckBox ckbCopii;
+        private System.Windows.Forms.ComboBox cmbNrExemplare;
+        private System.Windows.Forms.ListBox lstAfisare;
+        private System.Windows.Forms.Label lblID;
     }
 }
 

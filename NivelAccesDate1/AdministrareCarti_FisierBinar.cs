@@ -19,7 +19,7 @@ namespace NivelAccesDate1
             throw new Exception("Optiunea AddCarte nu este implementata");
         }
 
-        public ArrayList GetCarti()
+        public List<Carte> GetCarti()
         {
             throw new Exception("Optiunea GetCarti nu este implementata");
         }
@@ -35,6 +35,10 @@ namespace NivelAccesDate1
         public int NrCarti()
         {
             throw new Exception("Optiunea NrCarti nu este implementata");
+        }
+        public Carte GetCarteByIndex(int index)
+        {
+            throw new Exception("Optiunea GetCarteByIndex nu este implementata");
         }
     }
 }

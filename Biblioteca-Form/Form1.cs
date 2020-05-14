@@ -3,14 +3,14 @@ using System.Drawing;
 using System.Windows.Forms;
 using NivelAccesDate1;
 using LibrarieModele;
-using System.Collections;
+using System.Collections.Generic;
 
 namespace Biblioteca_Form
 {
     public partial class Form1 : Form
     {
         IStocareData1 adminCarti;
-        GenCarte genuriSelectate;
+        List<string> genuriSelectate = new List<string>();
         public Form1()
         {
             InitializeComponent();
@@ -26,9 +26,10 @@ namespace Biblioteca_Form
             if (validare == CodEroare.CORECT)
 
             {
-                Carte c = new Carte(txtTitlu.Text, txtAutor.Text, txtEditura.Text, Convert.ToInt32(txtNrExemplare.Text));
+                Carte c = new Carte(txtTitlu.Text, txtAutor.Text, txtEditura.Text, Convert.ToInt32(cmbNrExemplare.Text));
                 c.Limba = GetSelectedLimba();
-                c.Gen = genuriSelectate;
+                c.Gen = new List<string>();
+                c.Gen.AddRange(genuriSelectate);
                 lblInfo.Text = "Cartea a fost adăugată";
                 adminCarti.AddCarte(c);
             }
@@ -38,7 +39,7 @@ namespace Biblioteca_Form
             }
             ResetareControale();
         }
-        private CodEroare Validare()
+        public CodEroare Validare()
         {
             CodEroare rezultatValidare = CodEroare.CORECT;
             if (txtTitlu.Text == string.Empty)
@@ -53,7 +54,7 @@ namespace Biblioteca_Form
             {
                 rezultatValidare |= CodEroare.EDITURA_INCORECTA;
             }
-            if (txtNrExemplare.Text == string.Empty || Int32.TryParse(txtNrExemplare.Text, out int rez) == false)
+            if (cmbNrExemplare.Text == string.Empty || Int32.TryParse(cmbNrExemplare.Text, out int rez) == false)
             {
                 rezultatValidare|= CodEroare.EXEMPLARE_INCORECT;
             }
@@ -64,12 +65,15 @@ namespace Biblioteca_Form
 
         private void btnAfisare_Click(object sender, EventArgs e)
         {
-            rtbAfisare.Text=string.Empty;
-            ArrayList carti = adminCarti.GetCarti();
+            lstAfisare.Items.Clear();
+            var antetTabel = String.Format("{0,-5}{1,-40}{2,20}\n", "Id", "Titlu și Autor", "Număr exemplare");
+            lstAfisare.Items.Add(antetTabel);
+
+            List<Carte> carti = adminCarti.GetCarti();
             foreach (Carte s in carti)
             {
-                rtbAfisare.Text += s.ConversieLaSir();
-                rtbAfisare.Text += "\n";
+                var linieTabel = String.Format("{0,-5}{1,-40}{2,20}\n", s.Cod, s.NumeComplet, s.NumarExemplare.ToString());
+                lstAfisare.Items.Add(linieTabel);
             }
         }
 
@@ -84,24 +88,8 @@ namespace Biblioteca_Form
 
         private void btnModifica_Click(object sender, EventArgs e)
         {
-            Carte carte = adminCarti.GetCarte(txtTitlu.Text, txtAutor.Text);
-            if (carte != null)
-            {
-                int n;
-                bool rez = Int32.TryParse(txtNrExemplare.Text, out n);
-                if (rez == true)
-                {
-                    carte.NumarExemplare = n;
-                    if (adminCarti.UpdateCarte(carte) == true)
-                        lblInfo.Text = "S-a modificat cu succes!";
-                    else
-                        lblInfo.Text = "Nu s-a putut actualiza";
-                }
-                else
-                    lblInfo.Text = "Nu ați introdus un număr valid";
-            }
-            else
-                lblInfo.Text = "Nu s-a găsit această carte";
+            FormularModificaCarte frm = new FormularModificaCarte(lblID.Text);
+            frm.ShowDialog();
         }
 
         private void btnCartiDisponibile_Click(object sender, EventArgs e)
@@ -114,14 +102,13 @@ namespace Biblioteca_Form
             else
                 lblInfo.Text = "Nu s-a găsit această carte";
         }
-        private void ResetCuloareEtichete()
+        public void ResetCuloareEtichete()
         {
             lblTitlu.ForeColor = SystemColors.ButtonFace;
             lblAutor.ForeColor = SystemColors.ButtonFace;
             lblEditura.ForeColor = SystemColors.ButtonFace;
             lblNrExemplare.ForeColor = SystemColors.ButtonFace;
             gpbLimba.ForeColor = SystemColors.ButtonFace;
-
         }
         private LimbaCarte GetSelectedLimba()
         {
@@ -139,7 +126,7 @@ namespace Biblioteca_Form
                 return LimbaCarte.Rusa;
             return LimbaCarte.Nedefinit;
         }
-        private void MarcheazaControaleCuDateIncorecte(CodEroare validare)
+        public void MarcheazaControaleCuDateIncorecte(CodEroare validare)
         {
             if ((validare & CodEroare.TITLU_INCORECT) == CodEroare.TITLU_INCORECT)
             {
@@ -156,20 +143,28 @@ namespace Biblioteca_Form
             if ((validare & CodEroare.LIMBA_NESELECTATA) == CodEroare.LIMBA_NESELECTATA)
             {
                 gpbLimba.ForeColor = Color.Red;
+                rbEngleza.ForeColor = SystemColors.ButtonFace;
+                rbFranceza.ForeColor = SystemColors.ButtonFace;
+                rbRomana.ForeColor = SystemColors.ButtonFace;
+                rbGermana.ForeColor = SystemColors.ButtonFace;
+                rbRusa.ForeColor = SystemColors.ButtonFace;
+                rbItaliana.ForeColor = SystemColors.ButtonFace;
             }
         }
 
         private void ckbGen_CheckedChanged(object sender, EventArgs e)
         {
             CheckBox checkBoxControl = sender as CheckBox;
+            string genSelectat = checkBoxControl.Text;
+            //verificare daca checkbox-ul asupra caruia s-a actionat este selectat
             if (checkBoxControl.Checked == true)
-                genuriSelectate |= (GenCarte)Enum.Parse(typeof(GenCarte),checkBoxControl.Text);
+                genuriSelectate.Add(genSelectat);
             else
-                genuriSelectate &= ~(GenCarte)Enum.Parse(typeof(GenCarte), checkBoxControl.Text);
+                genuriSelectate.Remove(genSelectat);
         }
         private void ResetareControale()
         {
-            txtAutor.Text = txtTitlu.Text = txtEditura.Text = txtNrExemplare.Text = string.Empty;
+            txtAutor.Text = txtTitlu.Text = txtEditura.Text = cmbNrExemplare.Text = string.Empty;
             rbEngleza.Checked = false;
             rbFranceza.Checked = false;
             rbGermana.Checked = false;
@@ -188,8 +183,49 @@ namespace Biblioteca_Form
             ckbPoetica.Checked = false;
             ckbReligie.Checked = false;
             ckbUmoristic.Checked = false;
-            genuriSelectate = genuriSelectate & ~genuriSelectate;
+            genuriSelectate.Clear();
             lblInfo.Text = string.Empty;
+            lblID.Text = string.Empty;
+        }
+
+        private void lstAfisare_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ResetareControale();
+            Carte s = adminCarti.GetCarteByIndex(lstAfisare.SelectedIndex - 1);
+
+            if (s != null)
+            {
+                lblID.Text = s.Cod.ToString();
+
+                txtTitlu.Text = s.Titlu;
+                txtAutor.Text = s.Autor;
+                txtEditura.Text = s.Editura;
+
+                foreach (var lim in gpbLimba.Controls)
+                {
+                    if (lim is RadioButton)
+                    {
+                        var limBox = lim as RadioButton;
+                        if (limBox.Text == s.Limba.ToString())
+                        {
+                            limBox.Checked = true;
+                        }
+                    }
+                }
+
+                foreach (var genul in gpbGenul.Controls)
+                {
+                    if (genul is CheckBox)
+                    {
+                        var genBox = genul as CheckBox;
+                        foreach (String dis in s.Gen)
+                            if (genBox.Text.Equals(dis))
+                                genBox.Checked = true;
+                    }
+                }
+
+                cmbNrExemplare.Text = s.NumarExemplare.ToString();
+            }
         }
     }
 }

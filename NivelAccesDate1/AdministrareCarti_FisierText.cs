@@ -44,9 +44,9 @@ namespace NivelAccesDate1
             }
         }
 
-        public ArrayList GetCarti()
+        public List<Carte> GetCarti()
         {
-            ArrayList carti = new ArrayList();
+            List<Carte> carti = new List<Carte>();
 
             try
             {
@@ -76,7 +76,7 @@ namespace NivelAccesDate1
         }
         public bool UpdateCarte(Carte carte)
         {
-            ArrayList carti = GetCarti();
+            List<Carte> carti = GetCarti();
             bool actualizareCuSucces = false;
             try
             {
@@ -154,6 +154,35 @@ namespace NivelAccesDate1
                         Carte carte = new Carte(line);
                         if (carte.Titlu.Equals(titlu) && carte.Autor.Equals(autor))
                             return carte;
+                    }
+                }
+            }
+            catch (IOException eIO)
+            {
+                throw new Exception("Eroare la deschiderea fisierului. Mesaj: " + eIO.Message);
+            }
+            catch (Exception eGen)
+            {
+                throw new Exception("Eroare generica. Mesaj: " + eGen.Message);
+            }
+            return null;
+        }
+        public Carte GetCarteByIndex(int index)
+        {
+            try
+            {
+                // instructiunea 'using' va apela sr.Close()
+                using (StreamReader sr = new StreamReader(NumeFisier))
+                {
+                    string line;
+                    int contor = 0;
+                    //citeste cate o linie si creaza un obiect de tip Student pe baza datelor din linia citita
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        Carte carte = new Carte(line);
+                        if (contor == index)
+                            return carte;
+                        contor++;
                     }
                 }
             }

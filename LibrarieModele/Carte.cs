@@ -13,7 +13,7 @@ namespace LibrarieModele
         private const int MAI_MIC = 1;
         private const int EGAL = 0;
         private const char SEPARATOR_PRINCIPAL_FISIER = ';';
-        private const char SEPARATOR_SECUNDAR_FISIER = ',';
+        private const char SEPARATOR_SECUNDAR_FISIER = ' ';
         private const int TITLU = 0;
         private const int AUTOR = 1;
         private const int EDITURA = 2;
@@ -31,10 +31,25 @@ namespace LibrarieModele
         public string Editura { get; set; }
         public int NumarExemplare { get; set; }
         public int NumarImprumutate { get; set; }
-        public string NumeComplet { get { return Titlu + " - " + Autor + " - " + Editura; } }
+        public string NumeComplet { get { return Titlu + " - " + Autor; } }
         public LimbaCarte Limba { get; set; }
-        public GenCarte Gen { get; set; }
+        public List<string> Gen { get; set; }
         public int CartiDisponibile { get { return NumarExemplare - NumarImprumutate; } }
+        public string GenToString {
+            get { 
+                string sGenuri = string.Empty;
+
+                foreach (string tip in Gen)
+                {
+                    if (sGenuri != string.Empty)
+                    {
+                        sGenuri += SEPARATOR_SECUNDAR_FISIER;
+                    }
+                    sGenuri += tip;
+                }
+
+                return sGenuri;
+            } }
         
 
         public Carte(string _titlu = "", string _autor = "", string _editura = "", int nrex = 1)
@@ -58,11 +73,13 @@ namespace LibrarieModele
             NumarExemplare = Convert.ToInt32(infoCarte[N_EXEMPLARE]);
             NumarImprumutate = Convert.ToInt32(infoCarte[N_IMPRUMUTATE]);
             Limba = (LimbaCarte)Enum.Parse(typeof(LimbaCarte), infoCarte[LIMBA]);
-            Gen = (GenCarte)Enum.Parse(typeof(GenCarte), infoCarte[GEN]);
+            Gen = new List<string>();
+            //adauga mai multe elemente in lista de genuri
+            Gen.AddRange(infoCarte[GEN].Split(SEPARATOR_SECUNDAR_FISIER));
         }
         public string ConversieLaSir()
         {
-            return "#"+Cod.ToString()+" - "+Titlu + " - " + Autor + " - " + Editura +"\nLimbă: "+Limba+"\nGen: "+Gen+"\nNumăr de exemplare: "+NumarExemplare.ToString()+"\n";
+            return "#"+Cod.ToString()+" - "+Titlu + " - " + Autor + " - " + Editura +"\nLimbă: "+Limba+"\nGen: "+GenToString+"\nNumăr de exemplare: "+NumarExemplare.ToString()+"\n";
         }
         public int Compara(Carte c)
         {
@@ -83,7 +100,7 @@ namespace LibrarieModele
         public string ConversieLaSir_PentruFisier()
         {
             string s = string.Format("{1}{0}{2}{0}{3}{0}{4}{0}{5}{0}{6}{0}{7}{0}{8}",
-                SEPARATOR_PRINCIPAL_FISIER, (Titlu ?? "NECUNOSCUT"), (Autor ?? " NECUNOSCUT "), (Editura ?? " NECUNOSCUT "), Cod.ToString(), NumarExemplare.ToString(), NumarImprumutate.ToString(),Limba, Gen);
+                SEPARATOR_PRINCIPAL_FISIER, (Titlu ?? "NECUNOSCUT"), (Autor ?? " NECUNOSCUT "), (Editura ?? " NECUNOSCUT "), Cod.ToString(), NumarExemplare.ToString(), NumarImprumutate.ToString(),Limba, GenToString);
 
             return s;
         }

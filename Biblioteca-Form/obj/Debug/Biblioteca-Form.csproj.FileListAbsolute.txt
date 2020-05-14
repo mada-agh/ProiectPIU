@@ -15,3 +15,4 @@ C:\Users\Madalina\Documents\GitHub\Biblioteca-Form\obj\Debug\Biblioteca-Form.csp
 C:\Users\Madalina\Documents\GitHub\Biblioteca-Form\obj\Debug\Biblioteca_Form.exe
 C:\Users\Madalina\Documents\GitHub\Biblioteca-Form\obj\Debug\Biblioteca_Form.pdb
 C:\Users\Madalina\Documents\GitHub\Biblioteca-Form\obj\Debug\Biblioteca_Form.Form1.resources
+C:\Users\Madalina\Documents\GitHub\Biblioteca-Form\obj\Debug\Biblioteca_Form.FormularModificaCarte.resources

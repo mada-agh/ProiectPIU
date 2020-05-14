@@ -11,9 +11,10 @@ namespace NivelAccesDate1
     public interface IStocareData1
     {
         void AddCarte(Carte s);
-        ArrayList GetCarti();
+        List<Carte> GetCarti();
         bool UpdateCarte(Carte carte);
         int NrCarti();
         Carte GetCarte(string titlu, string autor);
+        Carte GetCarteByIndex(int index);
     }
 }

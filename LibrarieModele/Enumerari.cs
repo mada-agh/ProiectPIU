@@ -12,14 +12,14 @@ namespace LibrarieModele
         Romana = 1,
         Engleza = 2,
         Franceza = 3,
-        Germana = 3,
-        Italiana = 4,
-        Rusa = 5,
-        Spaniola = 6,
-        Ucraineana = 7,
-        Japoneza = 8,
-        Chineza = 9,
-        Coreeana = 10
+        Germana = 4,
+        Italiana = 5,
+        Rusa = 6,
+        Spaniola = 7,
+        Ucraineana = 8,
+        Japoneza = 9,
+        Chineza = 10,
+        Coreeana = 11
     };
     [Flags]
     public enum GenCarte
