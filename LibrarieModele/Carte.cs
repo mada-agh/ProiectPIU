@@ -22,6 +22,7 @@ namespace LibrarieModele
         private const int N_IMPRUMUTATE = 5;
         private const int LIMBA = 6;
         private const int GEN = 7;
+        private const int DATA_ACTUALIZARE = 8;
         
 
         public static int NextID { get; set; } = 0;
@@ -34,6 +35,7 @@ namespace LibrarieModele
         public string NumeComplet { get { return Titlu + " - " + Autor; } }
         public LimbaCarte Limba { get; set; }
         public List<string> Gen { get; set; }
+        public DateTime dataActualizare { get; set; }
         public int CartiDisponibile { get { return NumarExemplare - NumarImprumutate; } }
         public string GenToString {
             get { 
@@ -60,6 +62,7 @@ namespace LibrarieModele
             Cod = ++NextID;
             NumarExemplare = nrex;
             NumarImprumutate = 0;
+            dataActualizare = DateTime.Now;
         }
         public Carte(string date)
         {
@@ -76,6 +79,7 @@ namespace LibrarieModele
             Gen = new List<string>();
             //adauga mai multe elemente in lista de genuri
             Gen.AddRange(infoCarte[GEN].Split(SEPARATOR_SECUNDAR_FISIER));
+            dataActualizare = DateTime.Parse(infoCarte[DATA_ACTUALIZARE]);
         }
         public string ConversieLaSir()
         {
@@ -99,8 +103,8 @@ namespace LibrarieModele
         }
         public string ConversieLaSir_PentruFisier()
         {
-            string s = string.Format("{1}{0}{2}{0}{3}{0}{4}{0}{5}{0}{6}{0}{7}{0}{8}",
-                SEPARATOR_PRINCIPAL_FISIER, (Titlu ?? "NECUNOSCUT"), (Autor ?? " NECUNOSCUT "), (Editura ?? " NECUNOSCUT "), Cod.ToString(), NumarExemplare.ToString(), NumarImprumutate.ToString(),Limba, GenToString);
+            string s = string.Format("{1}{0}{2}{0}{3}{0}{4}{0}{5}{0}{6}{0}{7}{0}{8}{0}{9}",
+                SEPARATOR_PRINCIPAL_FISIER, (Titlu ?? "NECUNOSCUT"), (Autor ?? " NECUNOSCUT "), (Editura ?? " NECUNOSCUT "), Cod.ToString(), NumarExemplare.ToString(), NumarImprumutate.ToString(),Limba, GenToString, dataActualizare.ToString());
 
             return s;
         }

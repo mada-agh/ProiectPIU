@@ -175,7 +175,7 @@ namespace NivelAccesDate1
                 using (StreamReader sr = new StreamReader(NumeFisier))
                 {
                     string line;
-                    int contor = 0;
+                    int contor = 1;
                     //citeste cate o linie si creaza un obiect de tip Student pe baza datelor din linia citita
                     while ((line = sr.ReadLine()) != null)
                     {

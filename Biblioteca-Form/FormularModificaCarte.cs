@@ -7,17 +7,18 @@ using NivelAccesDate1;
 
 namespace Biblioteca_Form
 {
-    public partial class FormularModificaCarte : Form
+    public partial class FormularModificaCarte : MetroFramework.Forms.MetroForm
     {
         //Form1 formularCarte;
         IStocareData1 adminCarti;
         List<string> genuriSelectate = new List<string>();
-        public FormularModificaCarte(string codCarte)
+        public FormularModificaCarte(int codCarte)
         {
             InitializeComponent();
-            lblID.Text = codCarte;
+            lblID.Text = codCarte.ToString();
             adminCarti = StocareFactory.GetAdministratorStocare1();
-            Carte.NextID = adminCarti.NrCarti();
+            Carte.NextID= adminCarti.NrCarti();
+            SetareControale();
         }
 
         private void btnModifica_Click(object sender, EventArgs e)
@@ -32,19 +33,18 @@ namespace Biblioteca_Form
             }
             else
             {
-                Carte s = new Carte(txtTitlu.Text, txtAutor.Text, txtEditura.Text, Int32.Parse(cmbNrExemplare.Text));
+                Carte s = new Carte(mtxtTitlu.Text, mtxtAutor.Text, mtxtEditura.Text, Int32.Parse(dudNrExemplare.Text));
                 s.Cod = Int32.Parse(lblID.Text);
-
                 //verificare radioButton selectat
                 s.Limba = GetSelectedLimba();
                 //set Discipline
                 s.Gen = new List<string>();
                 s.Gen.AddRange(genuriSelectate);
 
-                adminCarti.UpdateCarte(s);
-
-                //resetarea controalelor pentru a introduce datele unui student nou
-                this.Close();
+                if (adminCarti.UpdateCarte(s) == true)
+                {
+                    this.Close();
+                }
             }
         }
         private LimbaCarte GetSelectedLimba()
@@ -67,51 +67,51 @@ namespace Biblioteca_Form
         {
             if ((validare & CodEroare.TITLU_INCORECT) == CodEroare.TITLU_INCORECT)
             {
-                lblTitlu.ForeColor = Color.Red;
+                mlblTitlu.ForeColor = Color.Red;
             }
             if ((validare & CodEroare.AUTOR_INCORECT) == CodEroare.AUTOR_INCORECT)
             {
-                lblAutor.ForeColor = Color.Red;
+                mlblAutor.ForeColor = Color.Red;
             }
             if ((validare & CodEroare.EDITURA_INCORECTA) == CodEroare.EDITURA_INCORECTA)
             {
-                lblEditura.ForeColor = Color.Red;
+                mlblEditura.ForeColor = Color.Red;
             }
             if ((validare & CodEroare.LIMBA_NESELECTATA) == CodEroare.LIMBA_NESELECTATA)
             {
                 gpbLimba.ForeColor = Color.Red;
-                rbEngleza.ForeColor = SystemColors.ButtonFace;
-                rbFranceza.ForeColor = SystemColors.ButtonFace;
-                rbRomana.ForeColor = SystemColors.ButtonFace;
-                rbGermana.ForeColor = SystemColors.ButtonFace;
-                rbRusa.ForeColor = SystemColors.ButtonFace;
-                rbItaliana.ForeColor = SystemColors.ButtonFace;
+                rbEngleza.ForeColor = Color.Gold;
+                rbFranceza.ForeColor = Color.Gold;
+                rbRomana.ForeColor = Color.Gold;
+                rbGermana.ForeColor = Color.Gold;
+                rbRusa.ForeColor = Color.Gold;
+                rbItaliana.ForeColor = Color.Gold;
             }
         }
         public void ResetCuloareEtichete()
         {
-            lblTitlu.ForeColor = SystemColors.ButtonFace;
-            lblAutor.ForeColor = SystemColors.ButtonFace;
-            lblEditura.ForeColor = SystemColors.ButtonFace;
-            lblNrExemplare.ForeColor = SystemColors.ButtonFace;
-            gpbLimba.ForeColor = SystemColors.ButtonFace;
+            mlblTitlu.ForeColor = Color.Gold;
+            mlblAutor.ForeColor = Color.Gold;
+            mlblEditura.ForeColor = Color.Gold;
+            mlblNrExemplare.ForeColor = Color.Gold;
+            gpbLimba.ForeColor = Color.Gold;
         }
         public CodEroare Validare()
         {
             CodEroare rezultatValidare = CodEroare.CORECT;
-            if (txtTitlu.Text == string.Empty)
+            if (mtxtTitlu.Text == string.Empty)
             {
                 rezultatValidare |= CodEroare.TITLU_INCORECT;
             }
-            if (txtAutor.Text == string.Empty)
+            if (mtxtAutor.Text == string.Empty)
             {
                 rezultatValidare |= CodEroare.AUTOR_INCORECT;
             }
-            if (txtEditura.Text == string.Empty)
+            if (mtxtEditura.Text == string.Empty)
             {
                 rezultatValidare |= CodEroare.EDITURA_INCORECTA;
             }
-            if (cmbNrExemplare.Text == string.Empty || Int32.TryParse(cmbNrExemplare.Text, out int rez) == false)
+            if (dudNrExemplare.Text == string.Empty)
             {
                 rezultatValidare |= CodEroare.EXEMPLARE_INCORECT;
             }
@@ -128,6 +128,69 @@ namespace Biblioteca_Form
                 genuriSelectate.Add(genSelectat);
             else
                 genuriSelectate.Remove(genSelectat);
+        }
+        private void SetareControale()
+        {
+            Carte s = adminCarti.GetCarteByIndex(Int32.Parse(lblID.Text));
+            if (s != null)
+            {
+                mtxtTitlu.Text = s.Titlu;
+                mtxtAutor.Text = s.Autor;
+                mtxtEditura.Text = s.Editura;
+
+                foreach (var lim in gpbLimba.Controls)
+                {
+                    if (lim is RadioButton)
+                    {
+                        var limBox = lim as RadioButton;
+                        if (limBox.Text == s.Limba.ToString())
+                        {
+                            limBox.Checked = true;
+                        }
+                    }
+                }
+
+                foreach (var genul in gpbGenul.Controls)
+                {
+                    if (genul is CheckBox)
+                    {
+                        var genBox = genul as CheckBox;
+                        foreach (String dis in s.Gen)
+                            if (genBox.Text.Equals(dis))
+                                genBox.Checked = true;
+                    }
+                }
+
+                dudNrExemplare.Text = s.NumarExemplare.ToString();
+            }
+        }
+
+        private void mtModifica_Click(object sender, EventArgs e)
+        {
+            ResetCuloareEtichete();
+
+            CodEroare codValidare = Validare();
+
+            if (codValidare != CodEroare.CORECT)
+            {
+                MarcheazaControaleCuDateIncorecte(codValidare);
+            }
+            else
+            {
+                Carte s = new Carte(mtxtTitlu.Text, mtxtAutor.Text, mtxtEditura.Text, Int32.Parse(dudNrExemplare.Text));
+                s.Cod = Int32.Parse(lblID.Text);
+
+                //verificare radioButton selectat
+                s.Limba = GetSelectedLimba();
+                //set Discipline
+                s.Gen = new List<string>();
+                s.Gen.AddRange(genuriSelectate);
+
+                if (adminCarti.UpdateCarte(s) == true)
+                {
+                    this.Close();
+                }
+            }
         }
     }
 }

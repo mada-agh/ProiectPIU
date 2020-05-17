@@ -33,6 +33,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MetroFramework, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroFramework.Design, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroFramework.Fonts, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.Fonts.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -47,6 +56,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CautaCarte.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CautaCarte.Designer.cs">
+      <DependentUpon>CautaCarte.cs</DependentUpon>
+    </Compile>
     <Compile Include="Enumerari.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -54,20 +69,59 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormaCartiDisponibile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormaCartiDisponibile.Designer.cs">
+      <DependentUpon>FormaCartiDisponibile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormaDataActualizarii.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormaDataActualizarii.Designer.cs">
+      <DependentUpon>FormaDataActualizarii.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormularAdaugaCarte.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormularAdaugaCarte.Designer.cs">
+      <DependentUpon>FormularAdaugaCarte.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormularModificaCarte.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormularModificaCarte.Designer.cs">
       <DependentUpon>FormularModificaCarte.cs</DependentUpon>
     </Compile>
+    <Compile Include="MainMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainMenu.Designer.cs">
+      <DependentUpon>MainMenu.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StocareFactory.cs" />
+    <EmbeddedResource Include="CautaCarte.resx">
+      <DependentUpon>CautaCarte.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormaCartiDisponibile.resx">
+      <DependentUpon>FormaCartiDisponibile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormaDataActualizarii.resx">
+      <DependentUpon>FormaDataActualizarii.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormularAdaugaCarte.resx">
+      <DependentUpon>FormularAdaugaCarte.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormularModificaCarte.resx">
       <DependentUpon>FormularModificaCarte.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainMenu.resx">
+      <DependentUpon>MainMenu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -78,6 +132,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

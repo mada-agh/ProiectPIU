@@ -1,13 +1,13 @@
 ﻿using System;
-using System.Drawing;
-using System.Windows.Forms;
+using System.Linq;
 using NivelAccesDate1;
 using LibrarieModele;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 
 namespace Biblioteca_Form
 {
-    public partial class Form1 : Form
+    public partial class Form1 : MetroFramework.Forms.MetroForm
     {
         IStocareData1 adminCarti;
         List<string> genuriSelectate = new List<string>();
@@ -16,8 +16,10 @@ namespace Biblioteca_Form
             InitializeComponent();
             adminCarti = StocareFactory.GetAdministratorStocare1();
             Carte.NextID = adminCarti.NrCarti();
+            List<Carte> carti = adminCarti.GetCarti();
+            AfiseazaMetroGrid(carti);
         }
-
+        /*
         private void btnAdauga_Click(object sender, EventArgs e)
         {
             ResetCuloareEtichete();
@@ -61,7 +63,7 @@ namespace Biblioteca_Form
             if (GetSelectedLimba() == LimbaCarte.Nedefinit)
                 rezultatValidare |= CodEroare.LIMBA_NESELECTATA;
             return rezultatValidare;
-        }
+        } 
 
         private void btnAfisare_Click(object sender, EventArgs e)
         {
@@ -75,25 +77,21 @@ namespace Biblioteca_Form
                 var linieTabel = String.Format("{0,-5}{1,-40}{2,20}\n", s.Cod, s.NumeComplet, s.NumarExemplare.ToString());
                 lstAfisare.Items.Add(linieTabel);
             }
-        }
-
+        } 
+        */
         private void btnCauta_Click(object sender, EventArgs e)
-        {
+        { /*
             Carte carte = adminCarti.GetCarte(txtTitlu.Text, txtAutor.Text);
             if (carte != null)
                 lblInfo.Text = carte.ConversieLaSir();
             else
                 lblInfo.Text = "Nu s-a găsit cartea";
-        }
-
-        private void btnModifica_Click(object sender, EventArgs e)
-        {
-            FormularModificaCarte frm = new FormularModificaCarte(lblID.Text);
-            frm.ShowDialog();
-        }
-
+                */
+        } 
+        
         private void btnCartiDisponibile_Click(object sender, EventArgs e)
         {
+            /*
             Carte carte = adminCarti.GetCarte(txtTitlu.Text, txtAutor.Text);
             if (carte != null)
             {
@@ -101,7 +99,8 @@ namespace Biblioteca_Form
             }
             else
                 lblInfo.Text = "Nu s-a găsit această carte";
-        }
+                */
+        } /*
         public void ResetCuloareEtichete()
         {
             lblTitlu.ForeColor = SystemColors.ButtonFace;
@@ -191,7 +190,7 @@ namespace Biblioteca_Form
         private void lstAfisare_SelectedIndexChanged(object sender, EventArgs e)
         {
             ResetareControale();
-            Carte s = adminCarti.GetCarteByIndex(lstAfisare.SelectedIndex - 1);
+            Carte s = adminCarti.GetCarteByIndex(lstAfisare.SelectedIndex);
 
             if (s != null)
             {
@@ -226,6 +225,57 @@ namespace Biblioteca_Form
 
                 cmbNrExemplare.Text = s.NumarExemplare.ToString();
             }
+        } */
+
+        private void mtAdauga_Click(object sender, EventArgs e)
+        {
+            FormularAdaugaCarte frmAdauga = new FormularAdaugaCarte();
+            frmAdauga.ShowDialog();
+        } 
+        public void AfiseazaMetroGrid(List<Carte> carti)
+        {
+            metroGridCarti.DataSource = null;
+            metroGridCarti.DataSource = carti.Select(s => new { s.Cod, s.Titlu, s.Autor, s.Editura, Limba=s.Limba.ToString(),Genuri = string.Join(",", s.Gen), s.NumarExemplare, s.dataActualizare }).ToList();
+        }
+
+        private void mtModifica_Click(object sender, EventArgs e)
+        {
+            FormularModificaCarte frm = new FormularModificaCarte(metroGridCarti.CurrentCell.RowIndex+1);
+            frm.ShowDialog();
+            List<Carte> carti = adminCarti.GetCarti();
+            AfiseazaMetroGrid(carti);
+        }
+
+        private void mtCautare_Click(object sender, EventArgs e)
+        {
+            CautaCarte frm = new CautaCarte();
+            frm.ShowDialog();
+        }
+
+        private void mtCartiDisponibile_Click(object sender, EventArgs e)
+        {
+            FormaCartiDisponibile frm = new FormaCartiDisponibile(metroGridCarti.CurrentCell.RowIndex+1);
+            frm.ShowDialog();
+        }
+
+        private void mtCautaDataActualizarii_Click(object sender, EventArgs e)
+        {
+            FormaDataActualizarii frm = new FormaDataActualizarii();
+            frm.ShowDialog();
+            AfiseazaMetroGrid(FormaDataActualizarii.incadrate);
+        }
+
+        private void mtResetLista_Click(object sender, EventArgs e)
+        {
+            List<Carte> carti = adminCarti.GetCarti();
+            AfiseazaMetroGrid(carti);
+        }
+
+        private void metroButton1_Click(object sender, EventArgs e)
+        {
+            MainMenu frm = new MainMenu();
+            frm.Show();
+            this.Hide();
         }
     }
 }

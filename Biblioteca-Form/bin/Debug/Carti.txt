@@ -1,1 +1,7 @@
-harry potter;roling;artur;1;11;0;Romana;Fantezie
+Harry Potter;J. K. Roling;Artur;1;12;0;Romana;Fantezie;5/17/2020 17:47:48
+Ingeri si Demoni;Dan Brown;triton;2;16;0;Rusa;Fictiune;5/17/2020 17:43:05
+titlu;autor;edit;3;5;0;Engleza;Criminalistic;5/17/2020 19:39:39
+titlu;autor;edit;4;5;0;Rusa;Criminalistic;5/17/2020 19:43:14
+titlu;autor;edit;5;5;0;Engleza;Criminalistic;5/17/2020 19:39:51
+titlu;autor;edit;6;5;0;Engleza;Criminalistic;5/17/2020 19:39:52
+titlu;autor;edit;7;5;0;Engleza;Criminalistic;5/17/2020 19:39:54

@@ -16,3 +16,11 @@ C:\Users\Madalina\Documents\GitHub\Biblioteca-Form\obj\Debug\Biblioteca_Form.exe
 C:\Users\Madalina\Documents\GitHub\Biblioteca-Form\obj\Debug\Biblioteca_Form.pdb
 C:\Users\Madalina\Documents\GitHub\Biblioteca-Form\obj\Debug\Biblioteca_Form.Form1.resources
 C:\Users\Madalina\Documents\GitHub\Biblioteca-Form\obj\Debug\Biblioteca_Form.FormularModificaCarte.resources
+C:\Users\Madalina\Documents\GitHub\Biblioteca-Form\bin\Debug\MetroFramework.Design.dll
+C:\Users\Madalina\Documents\GitHub\Biblioteca-Form\bin\Debug\MetroFramework.dll
+C:\Users\Madalina\Documents\GitHub\Biblioteca-Form\bin\Debug\MetroFramework.Fonts.dll
+C:\Users\Madalina\Documents\GitHub\Biblioteca-Form\obj\Debug\Biblioteca_Form.MainMenu.resources
+C:\Users\Madalina\Documents\GitHub\Biblioteca-Form\obj\Debug\Biblioteca_Form.FormularAdaugaCarte.resources
+C:\Users\Madalina\Documents\GitHub\Biblioteca-Form\obj\Debug\Biblioteca_Form.CautaCarte.resources
+C:\Users\Madalina\Documents\GitHub\Biblioteca-Form\obj\Debug\Biblioteca_Form.FormaCartiDisponibile.resources
+C:\Users\Madalina\Documents\GitHub\Biblioteca-Form\obj\Debug\Biblioteca_Form.FormaDataActualizarii.resources

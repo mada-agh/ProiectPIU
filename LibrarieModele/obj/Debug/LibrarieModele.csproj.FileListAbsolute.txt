@@ -1,6 +1,5 @@
 C:\Users\Madalina\Documents\GitHub\LibrarieModele\bin\Debug\LibrarieModele.dll
 C:\Users\Madalina\Documents\GitHub\LibrarieModele\bin\Debug\LibrarieModele.pdb
-C:\Users\Madalina\Documents\GitHub\LibrarieModele\obj\Debug\LibrarieModele.csprojAssemblyReference.cache
 C:\Users\Madalina\Documents\GitHub\LibrarieModele\obj\Debug\LibrarieModele.csproj.CoreCompileInputs.cache
 C:\Users\Madalina\Documents\GitHub\LibrarieModele\obj\Debug\LibrarieModele.dll
 C:\Users\Madalina\Documents\GitHub\LibrarieModele\obj\Debug\LibrarieModele.pdb
