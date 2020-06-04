@@ -69,17 +69,59 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormaAdaugaCititor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormaAdaugaCititor.Designer.cs">
+      <DependentUpon>FormaAdaugaCititor.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormaCartiDisponibile.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormaCartiDisponibile.Designer.cs">
       <DependentUpon>FormaCartiDisponibile.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormaCautaCititor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormaCautaCititor.Designer.cs">
+      <DependentUpon>FormaCautaCititor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormaCititori.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormaCititori.Designer.cs">
+      <DependentUpon>FormaCititori.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormaDataActualizarii.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormaDataActualizarii.Designer.cs">
       <DependentUpon>FormaDataActualizarii.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormaImprumuta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormaImprumuta.Designer.cs">
+      <DependentUpon>FormaImprumuta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormaImprumutaCarte.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormaImprumutaCarte.Designer.cs">
+      <DependentUpon>FormaImprumutaCarte.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormaModificaCititor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormaModificaCititor.Designer.cs">
+      <DependentUpon>FormaModificaCititor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormaReturnare.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormaReturnare.Designer.cs">
+      <DependentUpon>FormaReturnare.cs</DependentUpon>
     </Compile>
     <Compile Include="FormularAdaugaCarte.cs">
       <SubType>Form</SubType>
@@ -108,11 +150,32 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormaAdaugaCititor.resx">
+      <DependentUpon>FormaAdaugaCititor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormaCartiDisponibile.resx">
       <DependentUpon>FormaCartiDisponibile.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormaCautaCititor.resx">
+      <DependentUpon>FormaCautaCititor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormaCititori.resx">
+      <DependentUpon>FormaCititori.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormaDataActualizarii.resx">
       <DependentUpon>FormaDataActualizarii.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormaImprumuta.resx">
+      <DependentUpon>FormaImprumuta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormaImprumutaCarte.resx">
+      <DependentUpon>FormaImprumutaCarte.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormaModificaCititor.resx">
+      <DependentUpon>FormaModificaCititor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormaReturnare.resx">
+      <DependentUpon>FormaReturnare.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormularAdaugaCarte.resx">
       <DependentUpon>FormularAdaugaCarte.cs</DependentUpon>

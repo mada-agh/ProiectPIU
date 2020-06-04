@@ -1,11 +1,11 @@
-﻿using LibrarieModele;
+﻿//Agheorghiesei Madalina, grupa 3123A
+using LibrarieModele;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 
 namespace NivelAccesDate1
 {
-    //clasa AdministrareStudenti_FisierBinar implementeaza interfata IStocareData
     public class AdministrareCarti_FisierBinar : IStocareData1
     {
         string NumeFisier { get; set; }
@@ -39,6 +39,10 @@ namespace NivelAccesDate1
         public Carte GetCarteByIndex(int index)
         {
             throw new Exception("Optiunea GetCarteByIndex nu este implementata");
+        }
+        public bool StergeCarte(Carte carte)
+        {
+            throw new Exception("Optiunea StergeCarte nu este implementata");
         }
     }
 }

@@ -24,3 +24,10 @@ C:\Users\Madalina\Documents\GitHub\Biblioteca-Form\obj\Debug\Biblioteca_Form.For
 C:\Users\Madalina\Documents\GitHub\Biblioteca-Form\obj\Debug\Biblioteca_Form.CautaCarte.resources
 C:\Users\Madalina\Documents\GitHub\Biblioteca-Form\obj\Debug\Biblioteca_Form.FormaCartiDisponibile.resources
 C:\Users\Madalina\Documents\GitHub\Biblioteca-Form\obj\Debug\Biblioteca_Form.FormaDataActualizarii.resources
+C:\Users\Madalina\Documents\GitHub\Biblioteca-Form\obj\Debug\Biblioteca_Form.FormaCititori.resources
+C:\Users\Madalina\Documents\GitHub\Biblioteca-Form\obj\Debug\Biblioteca_Form.FormaAdaugaCititor.resources
+C:\Users\Madalina\Documents\GitHub\Biblioteca-Form\obj\Debug\Biblioteca_Form.FormaImprumuta.resources
+C:\Users\Madalina\Documents\GitHub\Biblioteca-Form\obj\Debug\Biblioteca_Form.FormaReturnare.resources
+C:\Users\Madalina\Documents\GitHub\Biblioteca-Form\obj\Debug\Biblioteca_Form.FormaCautaCititor.resources
+C:\Users\Madalina\Documents\GitHub\Biblioteca-Form\obj\Debug\Biblioteca_Form.FormaImprumutaCarte.resources
+C:\Users\Madalina\Documents\GitHub\Biblioteca-Form\obj\Debug\Biblioteca_Form.FormaModificaCititor.resources

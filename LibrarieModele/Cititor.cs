@@ -1,4 +1,5 @@
-﻿using System;
+﻿//Agheorghiesei Madalina, grupa 3123A
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,20 +18,29 @@ namespace LibrarieModele
         private const int COD = 0;
         private const int NUME = 1;
         private const int PRENUME = 2;
-        private const int NR_CARTI = 3;
-        private const int NR_IMPRUMUT_ID = 4;
+        private const int COD_CNP = 3;
+        private const int NR_TELEFON = 4;
+        private const int ADRESA = 5;
+        private const int NR_CARTI = 6;
+        private const int NR_IMPRUMUT_ID = 7;
 
         public int[] imprumutID; //codul cartilor imprumutate
         public static int NextID { get; set; } = 0;
         public string Nume { get; set; }
         public string Prenume { get; set; }
+        public string CNP { get; set; }
+        public string NrTelefon { get; set; }
+        public string Adresa { get; set; }
         public int NrCarti { get; set; }
         public int Cod { get; set; }
-        public string NumeComplet { get { return Nume + " " + Prenume + " - " + NrCarti.ToString() + " carti"; } }
-        public Cititor(string _nume = "", string _prenume = "")
+        public string NumeComplet { get { return Nume + " " + Prenume; } }
+        public Cititor(string _nume = "", string _prenume = "", string _cnp="", string _nrtel="", string _adresa="")
         {
             Nume = _nume;
             Prenume = _prenume;
+            CNP = _cnp;
+            NrTelefon = _nrtel;
+            Adresa = _adresa;
             NrCarti = 0;
             Cod = ++NextID;
             imprumutID = new int[MAX_CARTI_IMPRUMUT];
@@ -43,6 +53,9 @@ namespace LibrarieModele
             NextID = Cod;
             Nume = infoCititor[NUME];
             Prenume = infoCititor[PRENUME];
+            CNP = infoCititor[COD_CNP];
+            NrTelefon = infoCititor[NR_TELEFON];
+            Adresa = infoCititor[ADRESA];
             NrCarti = Int32.Parse(infoCititor[NR_CARTI]);
             imprumutID = new int[MAX_CARTI_IMPRUMUT];
             string[] IDcarti = infoCititor[NR_IMPRUMUT_ID].Split(SEPARATOR_SECUNDAR_FISIER);
@@ -77,8 +90,8 @@ namespace LibrarieModele
         }
         public string ConversieLaSir_PentruFisier()
         {
-            string s = string.Format("{1}{0}{2}{0}{3}{0}{4}{0}{5}",
-                SEPARATOR_PRINCIPAL_FISIER, Cod.ToString(), (Nume ?? "NECUNOSCUT"), (Prenume ?? " NECUNOSCUT "), NrCarti.ToString(), ConversieLaSir_ImprumutID());
+            string s = string.Format("{1}{0}{2}{0}{3}{0}{4}{0}{5}{0}{6}{0}{7}{0}{8}",
+                SEPARATOR_PRINCIPAL_FISIER, Cod.ToString(), (Nume ?? "NECUNOSCUT"), (Prenume ?? " NECUNOSCUT "), (CNP ?? "NECUNOSCUT"), (NrTelefon ?? "NECUNOSCUT"), (Adresa ?? "NECUNOSCUT"),NrCarti.ToString(), ConversieLaSir_ImprumutID());
 
             return s;
         }

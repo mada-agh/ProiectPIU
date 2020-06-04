@@ -1,4 +1,5 @@
-﻿using System;
+﻿//Agheorghiesei Madalina, grupa 3123A
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,5 +17,6 @@ namespace NivelAccesDate1
         int NrCarti();
         Carte GetCarte(string titlu, string autor);
         Carte GetCarteByIndex(int index);
+        bool StergeCarte(Carte carte);
     }
 }

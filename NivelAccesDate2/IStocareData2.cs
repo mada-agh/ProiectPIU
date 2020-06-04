@@ -1,4 +1,5 @@
-﻿using System;
+﻿//Agheorghiesei Madalina, grupa 3123A
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,11 @@ namespace NivelAccesDate2
     public interface IStocareData2
     {
         void AddCititor(Cititor s);
-        Cititor[] GetCititori(out int nrCititori);
-        bool UpdateCititor(Cititor[] cititori, int _cod);
+        List<Cititor> GetCititori();
+        bool UpdateCititor(Cititor cititor);
+        int NrCititori();
+        Cititor GetCititor(string nume, string prenume);
+        Cititor GetCititorByIndex(int index);
+        bool StergeCititor(Cititor cititor);
     }
 }

@@ -1,10 +1,10 @@
-﻿using LibrarieModele;
+﻿//Agheorghiesei Madalina, grupa 3123A
+using LibrarieModele;
 using System;
 using System.Collections.Generic;
 
 namespace NivelAccesDate2
 {
-    //clasa AdministrareStudenti_FisierBinar implementeaza interfata IStocareData
     public class AdministrareCititori_FisierBinar : IStocareData2
     {
         string NumeFisier { get; set; }
@@ -18,7 +18,7 @@ namespace NivelAccesDate2
             throw new Exception("Optiunea AddCititor nu este implementata");
         }
 
-        public Cititor[] GetCititori(out int nrCititori)
+        public List<Cititor> GetCititori()
         {
             throw new Exception("Optiunea GetCititori nu este implementata");
         }
@@ -27,9 +27,21 @@ namespace NivelAccesDate2
         {
             throw new Exception("Optiunea GetCititor nu este implementata");
         }
-        public bool UpdateCititor(Cititor[] c, int cod)
+        public bool UpdateCititor(Cititor cititor)
         {
-            throw new Exception("Optiunea UpdateCititor nu est implementata");
+            throw new Exception("Optiunea UpdateCititor nu este implementata");
+        }
+        public int NrCititori()
+        {
+            throw new Exception("Optiunea NrCititori nu este implementata");
+        }
+        public Cititor GetCititorByIndex(int index)
+        {
+            throw new Exception("Optiunea GetCititorByIndex nu este implementata");
+        }
+        public bool StergeCititor(Cititor cititor)
+        {
+            throw new Exception("Optiunea StergeCititor nu este implementata");
         }
     }
 }

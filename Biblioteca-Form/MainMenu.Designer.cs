@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainMenu));
             this.mtCarti = new MetroFramework.Controls.MetroTile();
-            this.metroTile2 = new MetroFramework.Controls.MetroTile();
+            this.mtCititori = new MetroFramework.Controls.MetroTile();
             this.SuspendLayout();
             // 
             // mtCarti
@@ -51,29 +51,30 @@
             this.mtCarti.UseTileImage = true;
             this.mtCarti.Click += new System.EventHandler(this.mtCarti_Click);
             // 
-            // metroTile2
+            // mtCititori
             // 
-            this.metroTile2.ActiveControl = null;
-            this.metroTile2.Location = new System.Drawing.Point(484, 126);
-            this.metroTile2.Name = "metroTile2";
-            this.metroTile2.Size = new System.Drawing.Size(294, 259);
-            this.metroTile2.Style = MetroFramework.MetroColorStyle.Yellow;
-            this.metroTile2.TabIndex = 1;
-            this.metroTile2.Text = "Cititori și imprumuturi";
-            this.metroTile2.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.metroTile2.TileImage = ((System.Drawing.Image)(resources.GetObject("metroTile2.TileImage")));
-            this.metroTile2.TileImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.metroTile2.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
-            this.metroTile2.TileTextFontWeight = MetroFramework.MetroTileTextWeight.Bold;
-            this.metroTile2.UseSelectable = true;
-            this.metroTile2.UseTileImage = true;
+            this.mtCititori.ActiveControl = null;
+            this.mtCititori.Location = new System.Drawing.Point(484, 126);
+            this.mtCititori.Name = "mtCititori";
+            this.mtCititori.Size = new System.Drawing.Size(294, 259);
+            this.mtCititori.Style = MetroFramework.MetroColorStyle.Yellow;
+            this.mtCititori.TabIndex = 1;
+            this.mtCititori.Text = "Cititori și împrumuturi";
+            this.mtCititori.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.mtCititori.TileImage = ((System.Drawing.Image)(resources.GetObject("mtCititori.TileImage")));
+            this.mtCititori.TileImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.mtCititori.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
+            this.mtCititori.TileTextFontWeight = MetroFramework.MetroTileTextWeight.Bold;
+            this.mtCititori.UseSelectable = true;
+            this.mtCititori.UseTileImage = true;
+            this.mtCititori.Click += new System.EventHandler(this.mtCititori_Click);
             // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(867, 553);
-            this.Controls.Add(this.metroTile2);
+            this.Controls.Add(this.mtCititori);
             this.Controls.Add(this.mtCarti);
             this.Name = "MainMenu";
             this.Style = MetroFramework.MetroColorStyle.Orange;
@@ -85,6 +86,6 @@
         #endregion
 
         private MetroFramework.Controls.MetroTile mtCarti;
-        private MetroFramework.Controls.MetroTile metroTile2;
+        private MetroFramework.Controls.MetroTile mtCititori;
     }
 }

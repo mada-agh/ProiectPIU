@@ -1,4 +1,5 @@
-﻿using System;
+﻿//Agheorghiesei Madalina, grupa 3123A
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using LibrarieModele;
@@ -30,6 +31,7 @@ namespace Biblioteca_Form
                 c.Gen = new List<string>();
                 c.Gen.AddRange(genuriSelectate);
                 adminCarti.AddCarte(c);
+                this.Close();
             }
             else
             {

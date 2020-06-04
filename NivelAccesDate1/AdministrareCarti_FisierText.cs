@@ -1,4 +1,5 @@
-﻿using System;
+﻿//Agheorghiesei Madalina, grupa 3123A
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,7 @@ using System.Collections;
 
 namespace NivelAccesDate1
 {
-    public class AdministrareCarti_FisierText : IStocareData1 //trebuie sa fac clasa ca aceasta si pentru cicitori? cum fac cu app.config?
+    public class AdministrareCarti_FisierText : IStocareData1 
     {
         private const int PAS_ALOCARE = 10;//suprascriem fisierul cand dam update
         string NumeFisier { get; set; }
@@ -55,7 +56,7 @@ namespace NivelAccesDate1
                 {
                     string line;
 
-                    //citeste cate o linie si creaza un obiect de tip Student pe baza datelor din linia citita
+                    //citeste cate o linie si creaza un obiect de tip Carte pe baza datelor din linia citita
                     while ((line = sr.ReadLine()) != null)
                     {
                         Carte s = new Carte(line);
@@ -86,7 +87,6 @@ namespace NivelAccesDate1
                 {
                     foreach (Carte c in carti)
                     {
-                        //informatiile despre studentul actualizat vor fi preluate din parametrul "studentActualizat"
                         if (c.Cod != carte.Cod)
                         {
                             swFisierText.WriteLine(c.ConversieLaSir_PentruFisier());
@@ -112,19 +112,18 @@ namespace NivelAccesDate1
         }
         public int NrCarti()
         {
-            int nrCarti;
+            int nrCarti=0;
             try
             {
                 // instructiunea 'using' va apela sr.Close()
                 using (StreamReader sr = new StreamReader(NumeFisier))
                 {
                     string line;
-                    nrCarti = 0;
-
-                    //citeste cate o linie si creaza un obiect de tip Student pe baza datelor din linia citita
+                    //citeste cate o linie si creaza un obiect de tip Carte pe baza datelor din linia citita
                     while ((line = sr.ReadLine()) != null)
                     {
-                        nrCarti++;
+                        Carte carte = new Carte(line);
+                        nrCarti=carte.Cod;
                     }
                 }
             }
@@ -148,7 +147,7 @@ namespace NivelAccesDate1
                 {
                     string line;
 
-                    //citeste cate o linie si creaza un obiect de tip Student pe baza datelor din linia citita
+                    //citeste cate o linie si creaza un obiect de tip Carte pe baza datelor din linia citita
                     while ((line = sr.ReadLine()) != null)
                     {
                         Carte carte = new Carte(line);
@@ -175,14 +174,12 @@ namespace NivelAccesDate1
                 using (StreamReader sr = new StreamReader(NumeFisier))
                 {
                     string line;
-                    int contor = 1;
-                    //citeste cate o linie si creaza un obiect de tip Student pe baza datelor din linia citita
+                    //citeste cate o linie si creaza un obiect de tip Carte pe baza datelor din linia citita
                     while ((line = sr.ReadLine()) != null)
                     {
                         Carte carte = new Carte(line);
-                        if (contor == index)
+                        if (carte.Cod == index)
                             return carte;
-                        contor++;
                     }
                 }
             }
@@ -195,6 +192,37 @@ namespace NivelAccesDate1
                 throw new Exception("Eroare generica. Mesaj: " + eGen.Message);
             }
             return null;
+        }
+        public bool StergeCarte(Carte carte)
+        {
+            List<Carte> carti = GetCarti();
+            bool actualizareCuSucces = false;
+            try
+            {
+                //instructiunea 'using' va apela la final swFisierText.Close();
+                //al doilea parametru setat la 'false' al constructorului StreamWriter indica modul 'overwrite' de deschidere al fisierului
+                using (StreamWriter swFisierText = new StreamWriter(NumeFisier, false))
+                {
+                    foreach (Carte c in carti)
+                    {
+                        if (c.Cod != carte.Cod)
+                        {
+                            swFisierText.WriteLine(c.ConversieLaSir_PentruFisier());
+                        }
+                    }
+                    actualizareCuSucces = true;
+                }
+            }
+            catch (IOException eIO)
+            {
+                throw new Exception("Eroare la deschiderea fisierului. Mesaj: " + eIO.Message);
+            }
+            catch (Exception eGen)
+            {
+                throw new Exception("Eroare generica. Mesaj: " + eGen.Message);
+            }
+
+            return actualizareCuSucces;
         }
     }
 }

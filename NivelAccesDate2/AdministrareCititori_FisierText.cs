@@ -1,4 +1,5 @@
-﻿using System;
+﻿//Agheorghiesei Madalina, grupa 3123A
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -43,26 +44,21 @@ namespace NivelAccesDate2
             }
         }
 
-        public Cititor[] GetCititori(out int nrCititori)
+        public List<Cititor> GetCititori()
         {
-            Cititor[] cititori = new Cititor[PAS_ALOCARE];
-
+            List<Cititor> cititori = new List<Cititor>();
             try
             {
                 // instructiunea 'using' va apela sr.Close()
                 using (StreamReader sr = new StreamReader(NumeFisier))
                 {
                     string line;
-                    nrCititori = 0;
 
-                    //citeste cate o linie si creaza un obiect de tip Student pe baza datelor din linia citita
+                    //citeste cate o linie si creaza un obiect de tip Cititori pe baza datelor din linia citita
                     while ((line = sr.ReadLine()) != null)
                     {
-                        cititori[nrCititori++] = new Cititor(line);
-                        if (nrCititori == PAS_ALOCARE)
-                        {
-                            Array.Resize(ref cititori, nrCititori + PAS_ALOCARE);
-                        }
+                        Cititor c = new Cititor(line);
+                        cititori.Add(c);
                     }
                 }
             }
@@ -77,23 +73,55 @@ namespace NivelAccesDate2
 
             return cititori;
         }
-        public bool UpdateCititor(Cititor[] cititori, int _cod)
+        public bool UpdateCititor(Cititor cititor)
         {
-            bool rez = false;
+            List<Cititor> cititori = GetCititori();
+            bool actualizareCuSucces = false;
             try
             {
-                string[] linii = File.ReadAllLines(NumeFisier);
-                using (StreamWriter swFisierText = new StreamWriter(NumeFisier))
+                //instructiunea 'using' va apela la final swFisierText.Close();
+                //al doilea parametru setat la 'false' al constructorului StreamWriter indica modul 'overwrite' de deschidere al fisierului
+                using (StreamWriter swFisierText = new StreamWriter(NumeFisier, false))
                 {
-                    for (int i = 0; i < linii.Length; i++)
+                    foreach (Cititor c in cititori)
                     {
-                        if (cititori[i].Cod == _cod)
+                        if (c.Cod != cititor.Cod)
                         {
-                            swFisierText.WriteLine(cititori[i].ConversieLaSir_PentruFisier());
-                            rez = true;
+                            swFisierText.WriteLine(c.ConversieLaSir_PentruFisier());
                         }
                         else
-                            swFisierText.WriteLine(linii[i]);
+                        {
+                            swFisierText.WriteLine(cititor.ConversieLaSir_PentruFisier());
+                        }
+                    }
+                    actualizareCuSucces = true;
+                }
+            }
+            catch (IOException eIO)
+            {
+                throw new Exception("Eroare la deschiderea fisierului. Mesaj: " + eIO.Message);
+            }
+            catch (Exception eGen)
+            {
+                throw new Exception("Eroare generica. Mesaj: " + eGen.Message);
+            }
+
+            return actualizareCuSucces;
+        }
+        public int NrCititori()
+        {
+            int nrCititori=0;
+            try
+            {
+                // instructiunea 'using' va apela sr.Close()
+                using (StreamReader sr = new StreamReader(NumeFisier))
+                {
+                    string line;
+                    //citeste cate o linie si creaza un obiect de tip Cititor pe baza datelor din linia citita
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        Cititor cititor = new Cititor(line);
+                        nrCititori=cititor.Cod;
                     }
                 }
             }
@@ -105,7 +133,94 @@ namespace NivelAccesDate2
             {
                 throw new Exception("Eroare generica. Mesaj: " + eGen.Message);
             }
-            return rez;
+
+            return nrCititori;
+        }
+        public Cititor GetCititor(string nume, string prenume)
+        {
+            try
+            {
+                // instructiunea 'using' va apela sr.Close()
+                using (StreamReader sr = new StreamReader(NumeFisier))
+                {
+                    string line;
+
+                    //citeste cate o linie si creaza un obiect de tip Cititor pe baza datelor din linia citita
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        Cititor cititor = new Cititor(line);
+                        if (cititor.Nume.Equals(nume) && cititor.Prenume.Equals(prenume))
+                            return cititor;
+                    }
+                }
+            }
+            catch (IOException eIO)
+            {
+                throw new Exception("Eroare la deschiderea fisierului. Mesaj: " + eIO.Message);
+            }
+            catch (Exception eGen)
+            {
+                throw new Exception("Eroare generica. Mesaj: " + eGen.Message);
+            }
+            return null;
+        }
+        public Cititor GetCititorByIndex(int index)
+        {
+            try
+            {
+                // instructiunea 'using' va apela sr.Close()
+                using (StreamReader sr = new StreamReader(NumeFisier))
+                {
+                    string line;
+                    //citeste cate o linie si creaza un obiect de tip Cititor pe baza datelor din linia citita
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        Cititor cititor = new Cititor(line);
+                        if (cititor.Cod == index)
+                            return cititor;
+                    }
+                }
+            }
+            catch (IOException eIO)
+            {
+                throw new Exception("Eroare la deschiderea fisierului. Mesaj: " + eIO.Message);
+            }
+            catch (Exception eGen)
+            {
+                throw new Exception("Eroare generica. Mesaj: " + eGen.Message);
+            }
+            return null;
+        }
+        public bool StergeCititor(Cititor cititor)
+        {
+            List<Cititor> cititori = GetCititori();
+            bool actualizareCuSucces = false;
+            try
+            {
+                //instructiunea 'using' va apela la final swFisierText.Close();
+                //al doilea parametru setat la 'false' al constructorului StreamWriter indica modul 'overwrite' de deschidere al fisierului
+                using (StreamWriter swFisierText = new StreamWriter(NumeFisier, false))
+                {
+                    foreach (Cititor c in cititori)
+                    {
+                        if (c.Cod != cititor.Cod)
+                        {
+                            swFisierText.WriteLine(c.ConversieLaSir_PentruFisier());
+                        }
+                    }
+                    actualizareCuSucces = true;
+                }
+            }
+            catch (IOException eIO)
+            {
+                throw new Exception("Eroare la deschiderea fisierului. Mesaj: " + eIO.Message);
+            }
+            catch (Exception eGen)
+            {
+                throw new Exception("Eroare generica. Mesaj: " + eGen.Message);
+            }
+
+            return actualizareCuSucces;
         }
     }
 }
